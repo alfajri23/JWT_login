@@ -25,6 +25,12 @@ Route::post('/register', [Controllers\Api\ApiController::class,'register']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('get-user', [Controllers\Api\ApiController::class,'get_user']);
+
+    Route::prefix('news')->group(function(){
+        Route::get('/', [Controllers\Api\NewsController::class,'index']);
+        Route::get('/{id}', [Controllers\Api\NewsController::class,'detail']);
+        Route::post('/', [Controllers\Api\NewsController::class,'create']);
+        Route::get('/delete/{id}', [Controllers\Api\NewsController::class,'delete']);
+    });
 });
 
-Route::get('news', [Controllers\Api\NewsController::class,'index']);
