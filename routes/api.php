@@ -25,7 +25,6 @@ Route::post('/register', [Controllers\Api\ApiController::class,'register']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('get-user', [Controllers\Api\ApiController::class,'get_user']);
-    Route::get('cek', function() {
-        dd("hallo");
-    });
 });
+
+Route::get('news', [Controllers\Api\NewsController::class,'index']);
