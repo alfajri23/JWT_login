@@ -70,7 +70,12 @@ class ApiController extends Controller
             return $this->respondError();
         }
 
+        //$user = JWTAuth::authenticate($token);
+        //$user = '';
+        $user = Auth::guard('api')->user();
+
         return response()->json([
+            'data'=>$user,
             'message' => 'Login successfully.',
             'status' => true,
             'access_token' => $token,
@@ -109,9 +114,14 @@ class ApiController extends Controller
                 	'message' => 'Could not create token.',
                 ], 500);
         }
+
+        //$user = JWTAuth::authenticate($token);
+        //$user = '';
+        $user = Auth::guard('api')->user();
  	
  		//Token created, return with success response and jwt token
         return response()->json([
+            'data'=>$user,
             'success' => true,
             'token' => $token,
         ]);
